@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-explosion-1
+  namespace: default
+  labels:
+    type: local
+spec:
+  storageClassName: prueba
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/tmp/prueba"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kafka-connect
+spec:
+  storageClassName: prueba
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
