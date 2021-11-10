@@ -20,6 +20,8 @@ jobs:
         pip install pylint
         pip install Flask
         pip install virtualenv
+        pip install bs4
+        pip install pathlib
         pip install pytest
         pip install coverage
     - name: Running pytest
