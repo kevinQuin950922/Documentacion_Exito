@@ -113,12 +113,12 @@ class test_connction(unittest.TestCase):
         self.assertTrue(mock_init)
 
 
-# # Pruebas al archivo main.py 
+# Pruebas al archivo main.py 
 # class test_main(unittest.TestCase):
 #     def test_projects(self):
 #         app = main.app
 #         with app.test_client() as client:
-#             response=client.get('http://localhost:5000/projects/2xz6nxtaxqxsje2pvmkxuqjqbogru3dplxmdtkme5eq4qzp35ugq/isidorelucien123')
+#             response=client.get('http://localhost:5000/projects/2xz6nxtaxqxsje2pvmkxuqjqbog3dplxmdtkme5eqzp35ugq/isidorelucien123')
 #             assert response.status_code ==200
 
 #     def test_readme(self):
@@ -131,7 +131,7 @@ class test_connction(unittest.TestCase):
 #             link =link + os.listdir(link)[0]+ '/readme.html'
 #             url=url+link
 #             response=client.get(url)
-#             assert response.status_code ==200
+#             assert response.status_code == 200
 #             deleteRepo()
 
     

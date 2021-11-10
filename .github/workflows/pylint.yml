@@ -24,6 +24,7 @@ jobs:
         pip install pathlib
         pip install azure
         pip install azure-devops
+        pip install python-dotenv
         pip install pytest
         pip install coverage
     - name: Running pytest
