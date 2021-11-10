@@ -23,6 +23,7 @@ jobs:
         pip install bs4
         pip install pathlib
         pip install azure
+        pip install azure-devops
         pip install pytest
         pip install coverage
     - name: Running pytest
