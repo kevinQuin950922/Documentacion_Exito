@@ -14,6 +14,7 @@ app = Flask(__name__, template_folder = template_dir)
 def get_projects(token,organization):
    obj = connection.ConnectionAz(token, organization)    
    jsonData = obj.startConnect()
+   print (jsonData)
    jsonString = json.dumps(jsonData)
    jsonDominio = {}
    for key in jsonData:
@@ -22,6 +23,7 @@ def get_projects(token,organization):
             jsonDominio[jsonData[key][key2]['Dominio']].append(jsonData[key][key2])
          else:
             jsonDominio[jsonData[key][key2]['Dominio']] = [jsonData[key][key2]]
+   print(render_template("template/index.html", jsonfile=jsonString, jsonDominioString = json.dumps(jsonDominio)))
    return render_template("template/index.html", jsonfile=jsonString, jsonDominioString = json.dumps(jsonDominio))
 
 @app.route('/readme', defaults={'path': ''})
