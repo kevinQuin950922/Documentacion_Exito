@@ -2,7 +2,6 @@ from flask import Flask, jsonify, render_template,current_app
 from flask.signals import template_rendered
 from bs4 import BeautifulSoup
 import json
-import connection
 import os
 from jinja2 import Environment, FileSystemLoader
 
@@ -10,11 +9,10 @@ from jinja2 import Environment, FileSystemLoader
 template_dir = os.path.abspath("./")
 app = Flask(__name__, template_folder = template_dir)
 
-@app.route("/projects/<token>/<organization>")
-def get_projects(token,organization):
-   obj = connection.ConnectionAz(token, organization)    
-   jsonData = obj.startConnect()
-   print (jsonData)
+@app.route("/projects/home")
+def get_projects():
+   with open('data.json') as file:
+      jsonData = json.load(file)
    jsonString = json.dumps(jsonData)
    jsonDominio = {}
    for key in jsonData:
@@ -23,7 +21,6 @@ def get_projects(token,organization):
             jsonDominio[jsonData[key][key2]['Dominio']].append(jsonData[key][key2])
          else:
             jsonDominio[jsonData[key][key2]['Dominio']] = [jsonData[key][key2]]
-   print(render_template("template/index.html", jsonfile=jsonString, jsonDominioString = json.dumps(jsonDominio)))
    return render_template("template/index.html", jsonfile=jsonString, jsonDominioString = json.dumps(jsonDominio))
 
 @app.route('/readme', defaults={'path': ''})
