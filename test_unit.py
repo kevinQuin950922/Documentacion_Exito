@@ -96,13 +96,13 @@ class test_connection(unittest.TestCase):
     # #Prueba metodo clone_or_pull_repos_for_project_id
     @mock.patch.object(ConnectionAz, '__init__', return_value=None)
     @mock.patch.object(ConnectionAz, 'createJsonResponse', return_value=None)
-    def test_clone_or_pull_repos_for_project_id(self, mock_init, mock_createJsonResponse):
+    def test_clone_or_pull_repos_for_project_id(self, mock_init, mock_create_json_response):
         create_repo()
         conection_az = ConnectionAz()
         conection_az.clone_or_pull_repos_for_project_id(
             'repositorioPrueba/prueba')
         self.assertTrue(mock_init)
-        self.assertTrue(mock_createJsonResponse)
+        self.assertTrue(mock_create_json_response)
         delete_repo()
 
     # prueba metodo conditionData
