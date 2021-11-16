@@ -38,5 +38,6 @@ jobs:
         coverage xml --omit=test_*
         coverage html --omit=test_*
     - name: Analysing the code with pylint
+      continue-on-error: true
       run: |
         pylint `ls -R|grep .py$|xargs`
