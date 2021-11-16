@@ -11,7 +11,7 @@ from pathlib import Path
 # carpeta temporal con repositorios
 
 
-def CreateRepo():
+def create_repo():
     if not(os.path.exists('./repositorioPrueba/prueba/prueba')):
         os.makedirs('./repositorioPrueba/prueba/prueba')
     f = open(f"./repositorioPrueba/prueba/prueba/readme.html", "w")
