@@ -11,7 +11,7 @@ import json
 import pathlib
 import sys
 sys.path.append ('/home/john-mejia/Documentos/proyecto-final/documentacion_continua_actualizador/repositorios/') 
-import repositorios
+#import repositorios
 class ConnectionAz:
     
     def __init__(self,token,organization):
