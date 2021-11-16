@@ -64,7 +64,7 @@ def create_repo():
 # eliminar repositorio
 
 
-def deleteRepo():
+def delete_repo():
     os.remove('./repositorioPrueba/prueba/prueba/readme.html')
     os.remove('./repositorioPrueba/prueba/prueba/readme.md')
     os.rmdir('./repositorioPrueba/prueba/prueba/')
@@ -82,35 +82,35 @@ class test_connction(unittest.TestCase):
     @mock.patch.object(ConnectionAz, '__init__', return_value=None)
     @mock.patch.object(ConnectionAz, 'conditionData', return_value=mock_conditionData)
     def test_createJson(self, mock_init, mock_connection):
-        except_createJsonResponse = json.loads(
+        except_create_json_response = json.loads(
             '{"prueba": {"dir_md": "repositorioPrueba/prueba/prueba/readme.html", "Área": " Soluciones de Clientes", "AnalistaÁgil": " Juan Guillermo Montoya", "Dominio": " Clientes", "Proyecto": " Móvil Éxito", "PalabrasClave": [" redención", " PCO", " acumulación"], "Infraestructuradedespliegue": [" AKS", "OKS", " GCP", " ODI", " OSB"], "SistemasOrigen": [" Clifre", " Teradata", " Sinco"], "SistemasDestino": [" Clifre", " Teradata", " Sinco", " Kafka"], "Tipodesarrollo": [" Api", " Worker", " Batch", " Modelo", " Portal Web", " Móvil ** main-pipeline.yml"], "VersiónLenguaje": [" NetCore", " Java", " Angular", " Python", " R"], "URLConsumoApi": "httpshttps//wolframio.grupo-exito.com/apiew/producto/v1/HLZKHMELSEVH/swagger/index.html"}}')
-        createRepo()
-        connectionAz = ConnectionAz()
-        respuesta_createJsonResponse = connectionAz.createJsonResponse(
+        create_repo()
+        connection_az = ConnectionAz()
+        respuesta_createJsonResponse = connection_az.createJsonResponse(
             ['repositorioPrubeba/prueba/prueba-prueba'], None)
         self.assertTrue(mock_connection)
         self.assertEqual(respuesta_createJsonResponse,
-                         except_createJsonResponse)
-        deleteRepo()
+                         except_create_json_response)
+        delete_repo()
 
     # #Prueba metodo clone_or_pull_repos_for_project_id
     @mock.patch.object(ConnectionAz, '__init__', return_value=None)
     @mock.patch.object(ConnectionAz, 'createJsonResponse', return_value=None)
     def test_clone_or_pull_repos_for_project_id(self, mock_init, mock_createJsonResponse):
-        createRepo()
+        create_repo()
         conectionAz = ConnectionAz()
         clone_test = conectionAz.clone_or_pull_repos_for_project_id(
             'repositorioPrueba/prueba')
         self.assertTrue(mock_init)
         self.assertTrue(mock_createJsonResponse)
-        deleteRepo()
+        delete_repo()
 
     # prueba metodo conditionData
     @mock.patch.object(ConnectionAz, '__init__', return_value=None)
     def test_conditionData(self, mock_init):
         excpect_conditionData = json.loads(
             '{"dir_md":"repositorioPrueba/prueba/prueba/readme.html","Área":" Soluciones de Clientes","AnalistaÁgil":" Juan Guillermo Montoya","Dominio":" Clientes","Proyecto":" Móvil Éxito","PalabrasClave":[" redención"," PCO"," acumulación"],"Infraestructuradedespliegue":[" AKS","OKS"," GCP"," ODI"," OSB"],"SistemasOrigen":[" Clifre"," Teradata"," Sinco"],"SistemasDestino":[" Clifre"," Teradata"," Sinco"," Kafka"],"Tipodesarrollo":[" Api"," Worker"," Batch"," Modelo"," Portal Web"," Móvil ** main-pipeline.yml"],"VersiónLenguaje":[" NetCore"," Java"," Angular"," Python"," R"],"URLConsumoApi":"httpshttps//wolframio.grupo-exito.com/apiew/producto/v1/HLZKHMELSEVH/swagger/index.htmlTabladecontenidoDescripcióndelanecesidadDiagramadelanecesidadClasificaciondelasInterfacesAtributosdecalidaddelasolucionDiagramadecomponentesdelaInterfazConsideracionesMapeodedatosMapeoMovil_Exito_BolsilloMapeoMovil_Exito_GestoresMapeoMovil_Exito_TipoajusteCaracterísticastécnicasdelaInterfazManejodeErroresManejodereprocesoManualdedespliegueInventariodeArtefactosTopologíasDirectoriosOperacionesdelaInterfaz(Servicio)"}')
-        createRepo()
+        create_repo()
         link = 'repositorioPrueba/'
         link = link + os.listdir(link)[0] + '/'
         link = link + os.listdir(link)[0]
@@ -119,7 +119,7 @@ class test_connction(unittest.TestCase):
         print(str(re_conditionData))
         self.assertEqual(re_conditionData, excpect_conditionData)
         self.assertTrue(mock_init)
-        deleteRepo()
+        delete_repo()
 
     # Prueba  metodo startConnect
     mock_clone=json.loads('{"prueba": {"dir_md":"repositorioPrueba/prueba/prueba/readme.html","Área":" Soluciones de Clientes","AnalistaÁgil":" Juan Guillermo Montoya","Dominio":" Clientes","Proyecto":" Móvil Éxito","PalabrasClave":[" redención"," PCO"," acumulación"],"Infraestructuradedespliegue":[" AKS","OKS"," GCP"," ODI"," OSB"],"SistemasOrigen":[" Clifre"," Teradata"," Sinco"],"SistemasDestino":[" Clifre"," Teradata"," Sinco"," Kafka"],"Tipodesarrollo":[" Api"," Worker"," Batch"," Modelo"," Portal Web"," Móvil ** main-pipeline.yml"],"VersiónLenguaje":[" NetCore"," Java"," Angular"," Python"," R"],"URLConsumoApi":"httpshttps//wolframio.grupo-exito.com/apiew/producto/v1/HLZKHMELSEVH/swagger/index.htmlTabladecontenidoDescripcióndelanecesidadDiagramadelanecesidadClasificaciondelasInterfacesAtributosdecalidaddelasolucionDiagramadecomponentesdelaInterfazConsideracionesMapeodedatosMapeoMovil_Exito_BolsilloMapeoMovil_Exito_GestoresMapeoMovil_Exito_TipoajusteCaracterísticastécnicasdelaInterfazManejodeErroresManejodereprocesoManualdedespliegueInventariodeArtefactosTopologíasDirectoriosOperacionesdelaInterfaz(Servicio)"}}')
@@ -128,12 +128,12 @@ class test_connction(unittest.TestCase):
     @mock.patch('connection.pathlib.Path',return_value=Path('repositorioPrueba/'))
     def test_startConnect(self, mock_init,mock_path,mock_clone):
         excpect_startConnect=json.loads('{"prueba": {"prueba": {"dir_md":"repositorioPrueba/prueba/prueba/readme.html","Área":" Soluciones de Clientes","AnalistaÁgil":" Juan Guillermo Montoya","Dominio":" Clientes","Proyecto":" Móvil Éxito","PalabrasClave":[" redención"," PCO"," acumulación"],"Infraestructuradedespliegue":[" AKS","OKS"," GCP"," ODI"," OSB"],"SistemasOrigen":[" Clifre"," Teradata"," Sinco"],"SistemasDestino":[" Clifre"," Teradata"," Sinco"," Kafka"],"Tipodesarrollo":[" Api"," Worker"," Batch"," Modelo"," Portal Web"," Móvil ** main-pipeline.yml"],"VersiónLenguaje":[" NetCore"," Java"," Angular"," Python"," R"],"URLConsumoApi":"httpshttps//wolframio.grupo-exito.com/apiew/producto/v1/HLZKHMELSEVH/swagger/index.htmlTabladecontenidoDescripcióndelanecesidadDiagramadelanecesidadClasificaciondelasInterfacesAtributosdecalidaddelasolucionDiagramadecomponentesdelaInterfazConsideracionesMapeodedatosMapeoMovil_Exito_BolsilloMapeoMovil_Exito_GestoresMapeoMovil_Exito_TipoajusteCaracterísticastécnicasdelaInterfazManejodeErroresManejodereprocesoManualdedespliegueInventariodeArtefactosTopologíasDirectoriosOperacionesdelaInterfaz(Servicio)"}}}')
-        createRepo()
+        create_repo()
         connectionAz = ConnectionAz()
         project = connectionAz.startConnect()
         self.assertEqual(project, excpect_startConnect)
         self.assertTrue(mock_init)
-        deleteRepo()
+        delete_repo()
 
 
 #Pruebas al archivo main.py
@@ -153,11 +153,11 @@ class Test_main(unittest.TestCase):
 
     @mock.patch('main.render_template',return_value=None)
     def test_render_vue(self,mock_render_template):
-        createRepo()
+        create_repo()
         re_render_vue=main.render_vue('repositorioPrueba/prueba/prueba/readme.html')
         self.assertTrue(mock_render_template)
         self.assertEqual(re_render_vue,None)
-        deleteRepo()
+        delete_repo()
 
 if __name__ == '__main__':
     unittest.main()
