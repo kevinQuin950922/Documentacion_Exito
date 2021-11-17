@@ -34,10 +34,10 @@ jobs:
     - name: Running pytest
       run: |
         coverage run -m pytest
-        coverage report --omit=test_*
-        coverage xml --omit=test_*
-        coverage html --omit=test_*
-        
+        coverage report --omit=/usr/lib/python3/dist-packages/*,test_*
+        coverage xml --omit=/usr/lib/python3/dist-packages/*,test_*
+        coverage html --omit=/usr/lib/python3/dist-packages/*,test_*
+
     - uses: actions/upload-artifact@v2
       with:
         name: code-coverage
