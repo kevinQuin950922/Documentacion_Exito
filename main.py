@@ -11,7 +11,7 @@ app = Flask(__name__, template_folder = template_dir)
 
 @app.route("/projects/home")
 def get_projects():
-   with open('data.json') as file:
+   with open('data/data.json') as file:
       jsonData = json.load(file)
    jsonString = json.dumps(jsonData)
    jsonDominio = {}
