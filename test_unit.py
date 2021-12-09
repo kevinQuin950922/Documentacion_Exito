@@ -1,6 +1,9 @@
 import unittest
 from json import load
 from unittest import mock
+
+from flask import flash
+from flask.app import Flask
 import main
 import tempfile
 import os
@@ -27,35 +30,33 @@ def create_repo():
     f.write('<p><strong>Tipo desarrollo:</strong> Api, Worker, Batch, Modelo, Portal Web, Móvil ** main-pipeline.yml</p>\n')
     f.write(
         '<p><strong>Versión Lenguaje:</strong> NetCore, Java, Angular, Python, R</p>\n')
-    f.write('<p><strong>URL Consumo Api:</strong> https://wolframio.grupo-exito.com/apiew/producto/v1/HLZKHMELSEVH/swagger/index.html</p>')
-    f.write('<h4 id="tabla-de-contenido">Tabla de contenido</h4>')
+    f.write('<p><strong>URL Consumo Api:</strong> https://wolframio.grupo-exito.com/apiew/producto/v1/HLZKHMELSEVH/swagger/index.html</p>\n')
+    f.write('<h4 id="tabla-de-contenido">Tabla de contenido</h4>\n')
     f.write('<ul>')
     f.write(
-        '<li><a href="#descripción-de-la-necesidad">Descripción de la necesidad</a></li>')
-    f.write('<li><a href="#diagrama-de-la-necesidad">Diagrama de la necesidad</a></li>')
-    f.write('<li><a href="#clasificacion-de-las-interfaces">Clasificacion de las Interfaces</a></li>')
-    f.write('<li><a href="#atributos-de-calidad-de-la-solucion">Atributos de calidad de la solucion</a></li>')
-    f.write('<li><a href="#diagrama-de-componentes-de-la-interfaz">Diagrama de componentes de la Interfaz</a></li>')
-    f.write('<li><a href="#consideraciones">Consideraciones</a></li>')
-    f.write('<li><a href="#mapeo-de-datos">Mapeo de datos</a></li>')
-    f.write(
-        '<li><a href="#mapeo_movil_exito_bolsillo">Mapeo Movil_Exito_Bolsillo</a></li>')
-    f.write(
-        '<li><a href="#mapeo_movil_exito_gestores">Mapeo Movil_Exito_Gestores</a></li>')
-    f.write('<li><a href="#mapeo_movil_exito_tipoajuste">Mapeo Movil_Exito_Tipoajuste</a></li>')
-    f.write('<li><a href="#características-técnicas-de-la-interfaz">Características técnicas de la Interfaz</a></li>')
-    f.write('<li><a href="#manejo-de-errores">Manejo de Errores</a></li>')
-    f.write('<li><a href="#manejo-de-reproceso">Manejo de reproceso</a></li>')
-    f.write('<li>')
-    f.write('<p><a href="#manual-de-despliegue">Manual de despliegue</a></p>')
-    f.write('</li>')
-    f.write('<li>')
-    f.write('<p><a href="#inventario-de-artefactos">Inventario de Artefactos</a></p>')
-    f.write('</li>')
-    f.write('<li><a href="#topologías">Topologías</a> </li>')
-    f.write('<li><a href="#directorios">Directorios</a></li>')
-    f.write('<li><a href="#Operaciones-de-la-Interfaz-(Servicio)">Operaciones de la Interfaz (Servicio)</a></li>')
-    f.write('</ul>')
+        '<li><a href="#descripción-de-la-necesidad">Descripción de la necesidad</a></li>\n')
+    f.write('<li><a href="#diagrama-de-la-necesidad">Diagrama de la necesidad</a></li>\n')
+    f.write('<li><a href="#clasificacion-de-las-interfaces">Clasificacion de las Interfaces</a></li>\n')
+    f.write('<li><a href="#atributos-de-calidad-de-la-solucion">Atributos de calidad de la solucion</a></li>\n')
+    f.write('<li><a href="#diagrama-de-componentes-de-la-interfaz">Diagrama de componentes de la Interfaz</a></li>\n')
+    f.write('<li><a href="#consideraciones">Consideraciones</a></li>\n')
+    f.write('<li><a href="#mapeo-de-datos">Mapeo de datos</a></li>\n')
+    f.write('<li><a href="#mapeo_movil_exito_bolsillo">Mapeo Movil_Exito_Bolsillo</a></li>\n')
+    f.write('<li><a href="#mapeo_movil_exito_gestores">Mapeo Movil_Exito_Gestores</a></li>\n')
+    f.write('<li><a href="#mapeo_movil_exito_tipoajuste">Mapeo Movil_Exito_Tipoajuste</a></li>\n')
+    f.write('<li><a href="#características-técnicas-de-la-interfaz">Características técnicas de la Interfaz</a></li>\n')
+    f.write('<li><a href="#manejo-de-errores">Manejo de Errores</a></li>\n')
+    f.write('<li><a href="#manejo-de-reproceso">Manejo de reproceso</a></li>\n')
+    f.write('<li>\n')
+    f.write('<p><a href="#manual-de-despliegue">Manual de despliegue</a></p>\n')
+    f.write('</li>\n')
+    f.write('<li>\n')
+    f.write('<p><a href="#inventario-de-artefactos">Inventario de Artefactos</a></p>\n')
+    f.write('</li>\n')
+    f.write('<li><a href="#topologías">Topologías</a> </li>\n')
+    f.write('<li><a href="#directorios">Directorios</a></li>\n')
+    f.write('<li><a href="#Operaciones-de-la-Interfaz-(Servicio)">Operaciones de la Interfaz (Servicio)</a></li>\n')
+    f.write('</ul>\n')
     f.close()
     f = open(f"./repositorioPrueba/prueba/prueba/readme.md", "w")
     f.close()
@@ -67,7 +68,7 @@ def create_json():
     f.write('{\n')
     f.write('"prueba400": {\n')
     f.write('    "prueba400": {\n')
-    f.write('        "dir_md": "data/repositorios/prueba400/prueba400/readme.html",\n')
+    f.write('        "dir_md": "repositorioPrueba/prueba/prueba/readme.html",\n')
     f.write('        "\u00c1rea": "Area prueba",\n')
     f.write('        "Analista\u00c1gil": "Analista prueba",\n')
     f.write('        "Dominio": "Dominio prueba",\n')
@@ -174,13 +175,17 @@ class test_main(unittest.TestCase):
             delete_json()
 
 
+    @mock.patch('flask.flash',return_value=None)
     @mock.patch('main.render_template',return_value=None)
-    def test_render_vue(self,mock_render_template):
+    def test_render_vue(self,mock_render_template,mock_flash):
         create_repo()
-        re_render_vue=main.render_vue('repositorioPrueba/prueba/prueba/readme.html')
-        self.assertTrue(mock_render_template)
-        self.assertEqual(re_render_vue,None)
-        delete_repo()
+        create_json()
+        with mock.patch('main.json.load',return_value=load(open('prueba_data/prueba/data.json'))) as mock_json:
+            re_render_vue=main.render_vue('data/repositorios/prueba400/prueba400/readme.html')
+            self.assertTrue(mock_render_template)
+            self.assertEqual(re_render_vue,None)
+            delete_repo()
+            delete_json()
 
 if __name__ == '__main__':
     unittest.main()
