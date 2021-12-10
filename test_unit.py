@@ -100,7 +100,7 @@ def delete_json():
     os.rmdir('./prueba_data')
 
 class create_str():
-    def read_html():
+    def read_html(self):
         create_repo()
         f=open("./repositorioPrueba/prueba/prueba/readme.html")
         html=f.read()
