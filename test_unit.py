@@ -104,7 +104,7 @@ class create_str():
         create_repo()
         f=open("./repositorioPrueba/prueba/prueba/readme.html")
         html=f.read()
-        delete_repo
+        delete_repo()
         return html
 
 # Pruebas archivo connection.py
@@ -188,13 +188,11 @@ class test_main(unittest.TestCase):
     @mock.patch('main.open',mock.mock_open(read_data=create_str.read_html()))
     def test_render_vue(self,mock_render_template,mock_flash):
         create_json()
-        create_repo()
         with mock.patch('main.json.load',return_value=load(open('prueba_data/prueba/data.json'))) as mock_json:
             re_render_vue=main.render_vue('./repositorioPrueba/prueba/prueba/readme.html')
             self.assertTrue(mock_render_template)
             self.assertEqual(re_render_vue,None)
             delete_json()
-            delete_repo()
 
 if __name__ == '__main__':
     unittest.main()
