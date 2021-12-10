@@ -85,6 +85,7 @@ def create_json():
     f.write('}\n')
     f.close()
 
+
 # eliminar repositorio
 def delete_repo():
     os.remove('./repositorioPrueba/prueba/prueba/readme.html')
@@ -97,6 +98,14 @@ def delete_json():
     os.remove('./prueba_data/prueba/data.json')
     os.rmdir('./prueba_data/prueba/')
     os.rmdir('./prueba_data')
+
+class create_str():
+    def read_html():
+        create_repo()
+        f=open("./repositorioPrueba/prueba/prueba/readme.html")
+        html=f.read()
+        delete_repo
+        return html
 
 # Pruebas archivo connection.py
 # class test_connection(unittest.TestCase):
@@ -174,18 +183,18 @@ class test_main(unittest.TestCase):
             self.assertEqual(re_get_project,None)
             delete_json()
 
-
     @mock.patch('flask.flash',return_value=None)
     @mock.patch('main.render_template',return_value=None)
+    @mock.patch('main.open',mock.mock_open(read_data=create_str.read_html()))
     def test_render_vue(self,mock_render_template,mock_flash):
-        create_repo()
         create_json()
+        create_repo()
         with mock.patch('main.json.load',return_value=load(open('prueba_data/prueba/data.json'))) as mock_json:
             re_render_vue=main.render_vue('./repositorioPrueba/prueba/prueba/readme.html')
             self.assertTrue(mock_render_template)
             self.assertEqual(re_render_vue,None)
-            delete_repo()
             delete_json()
+            delete_repo()
 
 if __name__ == '__main__':
     unittest.main()
