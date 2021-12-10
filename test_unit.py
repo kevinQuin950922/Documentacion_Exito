@@ -181,7 +181,7 @@ class test_main(unittest.TestCase):
         create_repo()
         create_json()
         with mock.patch('main.json.load',return_value=load(open('prueba_data/prueba/data.json'))) as mock_json:
-            re_render_vue=main.render_vue('data/repositorios/prueba400/prueba400/readme.html')
+            re_render_vue=main.render_vue('./repositorioPrueba/prueba/prueba/readme.html')
             self.assertTrue(mock_render_template)
             self.assertEqual(re_render_vue,None)
             delete_repo()
