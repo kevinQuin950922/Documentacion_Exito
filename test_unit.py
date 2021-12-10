@@ -99,8 +99,8 @@ def delete_json():
     os.rmdir('./prueba_data/prueba/')
     os.rmdir('./prueba_data')
 
-class create_str():
-    def read_html(self):
+class create_str:
+    def read_html():
         create_repo()
         f=open("./repositorioPrueba/prueba/prueba/readme.html")
         html=f.read()
