@@ -2,6 +2,7 @@ from typing import ValuesView
 import unittest
 import json
 from unittest import mock
+from defer import return_value
 from msrest.authentication import BasicAuthentication
 from azure.devops.connection import Connection
 import tempfile
@@ -14,28 +15,56 @@ import requests
 
 ## Creacion de repo
 def create_repo():
-    if not(os.path.exists('./repositorioPrueba/prueba/prueba')):
-        os.makedirs('./repositorioPrueba/prueba/prueba')
-    f = open(f"./repositorioPrueba/prueba/prueba/readme.md", "w")
-    f.write('**NOMBRE DE LA INTEGRACIÓN O DEL API**\n')
-    f.write('**Área:** Soluciones de Clientes\n')
-    f.write('**Analista Ágil:** Juan Guillermo Montoya\n')
-    f.write('**Dominio:** Clientes\n')
-    f.write('**Proyecto:** Móvil Éxito\n')
-    f.write('**Palabras Clave:** redención, PCO, acumulación\n')
-    f.write('**Infraestructura de despliegue:** AKS,OKS, GCP, ODI, OSB\n')
-    f.write('**Sistemas Origen:** Clifre, Teradata, Sinco \n')
-    f.write('**Sistemas Destino:** Clifre, Teradata, Sinco, Kafka\n')
-    f.write('**Tipo desarrollo:** Api, Worker, Batch, Modelo, Portal Web, Móvil ** main-pipeline.yml\n')
-    f.write('**Versión Lenguaje:** NetCore, Java, Angular, Python, R\n')
-    f.write('**URL Consumo Api:** https://wolframio.grupo-exito.com/apiew/producto/v1/HLZKHMELSEVH/swagger/index.html\n')
+    if not(os.path.exists('./repositorioPrueba/prueba/prueba/documentacion')):
+        os.makedirs('./repositorioPrueba/prueba/prueba/documentacion')
+    f = open(f"./repositorioPrueba/prueba/prueba/documentacion/readme.html", "w")
+    f.write('<p><strong>NOMBRE DE LA INTEGRACIÓN O DEL API</strong></p>\n')
+    f.write('<p><strong>Área:</strong> Soluciones de Clientes</p>\n')
+    f.write('<p><strong>Analista Ágil:</strong> Juan Guillermo Montoya</p>\n')
+    f.write('<p><strong>Dominio:</strong> Clientes</p>\n')
+    f.write('<p><strong>Proyecto:</strong> Móvil Éxito</p>\n')
+    f.write('<p><strong>Palabras Clave:</strong> redención, PCO, acumulación</p>\n')
+    f.write('<p><strong>Infraestructura de despliegue:</strong> AKS,OKS, GCP, ODI, OSB</p>\n')
+    f.write('<p><strong>Sistemas Origen:</strong> Clifre, Teradata, Sinco </p>\n')
+    f.write('<p><strong>Sistemas Destino:</strong> Clifre, Teradata, Sinco, Kafka</p>\n')
+    f.write('<p><strong>Tipo desarrollo:</strong> Api, Worker, Batch, Modelo, Portal Web, Móvil ** main-pipeline.yml</p>\n')
+    f.write('<p><strong>Versión Lenguaje:</strong> NetCore, Java, Angular, Python, R</p>\n')
+    f.write('<p><strong>URL Consumo Api:</strong> https://wolframio.grupo-exito.com/apiew/producto/v1/HLZKHMELSEVH/swagger/index.html</p>\n')
+    f.write('<h4 id="tabla-de-contenido">Tabla de contenido</h4>\n')
+    f.write('<ul>')
+    f.write('<li><a href="#descripción-de-la-necesidad">Descripción de la necesidad</a></li>\n')
+    f.write('<li><a href="#diagrama-de-la-necesidad">Diagrama de la necesidad</a></li>\n')
+    f.write('<li><a href="#clasificacion-de-las-interfaces">Clasificacion de las Interfaces</a></li>\n')
+    f.write('<li><a href="#atributos-de-calidad-de-la-solucion">Atributos de calidad de la solucion</a></li>\n')
+    f.write('<li><a href="#diagrama-de-componentes-de-la-interfaz">Diagrama de componentes de la Interfaz</a></li>\n')
+    f.write('<li><a href="#consideraciones">Consideraciones</a></li>\n')
+    f.write('<li><a href="#mapeo-de-datos">Mapeo de datos</a></li>\n')
+    f.write('<li><a href="#mapeo_movil_exito_bolsillo">Mapeo Movil_Exito_Bolsillo</a></li>\n')
+    f.write('<li><a href="#mapeo_movil_exito_gestores">Mapeo Movil_Exito_Gestores</a></li>\n')
+    f.write('<li><a href="#mapeo_movil_exito_tipoajuste">Mapeo Movil_Exito_Tipoajuste</a></li>\n')
+    f.write('<li><a href="#características-técnicas-de-la-interfaz">Características técnicas de la Interfaz</a></li>\n')
+    f.write('<li><a href="#manejo-de-errores">Manejo de Errores</a></li>\n')
+    f.write('<li><a href="#manejo-de-reproceso">Manejo de reproceso</a></li>\n')
+    f.write('<li>\n')
+    f.write('<p><a href="#manual-de-despliegue">Manual de despliegue</a></p>\n')
+    f.write('</li>\n')
+    f.write('<li>\n')
+    f.write('<p><a href="#inventario-de-artefactos">Inventario de Artefactos</a></p>\n')
+    f.write('</li>\n')
+    f.write('<li><a href="#topologías">Topologías</a> </li>\n')
+    f.write('<li><a href="#directorios">Directorios</a></li>\n')
+    f.write('<li><a href="#Operaciones-de-la-Interfaz-(Servicio)">Operaciones de la Interfaz (Servicio)</a></li>\n')
+    f.write('</ul>\n')
     f.close()
 
 def delete_repo():
-    os.remove('./repositorioPrueba/prueba/prueba/readme.html')
-    os.remove('./repositorioPrueba/prueba/prueba/readme.md')
-    os.rmdir('./repositorioPrueba/prueba/prueba/')
-    os.rmdir('./repositorioPrueba/prueba/')
+    if (os.path.exists('./repositorioPrueba/prueba/prueba/documentacion/readme.html')):
+        os.remove('./repositorioPrueba/prueba/prueba/documentacion/readme.html')
+    if (os.path.exists('./repositorioPrueba/prueba/prueba/documentacion/readme.md')):
+        os.remove('./repositorioPrueba/prueba/prueba/documentacion/readme.md')
+    os.rmdir('./repositorioPrueba/prueba/prueba/documentacion')
+    os.rmdir('./repositorioPrueba/prueba/prueba')
+    os.rmdir('./repositorioPrueba/prueba')
     os.rmdir('./repositorioPrueba')
 
 ##  Mock Class
@@ -65,6 +94,11 @@ class Mock_request:
         def decode(valor):
             return '{"Hola":"hola"}'
 
+class Mock_request_condition:
+    status_code = 400
+    content=None
+
+
 
 
 
@@ -92,8 +126,8 @@ class test_actualizador_azure_devops(unittest.TestCase):
         connection_az.personal_access_token='token'
         connection_az.clone_or_pull_repos_for_project_id(Mock_get_project)
         self.assertTrue(mock_create)
-        self.assertTrue(os.path.exists("data/repositorios/prueba"))
-        os.rmdir('data/repositorios/prueba')
+        self.assertTrue(os.path.exists("./../documentacion_continua/data/repositorios/prueba"))
+        os.rmdir('./../documentacion_continua/data/repositorios/prueba')
 
     
     #test CreateJsonResponse
@@ -115,20 +149,35 @@ class test_actualizador_azure_devops(unittest.TestCase):
         self.assertTrue(os.path.exists("prueba"))
         self.assertTrue(mock_conditiondata)
         os.rmdir('prueba')
-
-
-    # Mock conditionData
+    
+    #test conditionDataJson
+    @mock.patch.object(ConnectionAz,'__init__',return_value=None)
+    def test_conditionDataJson(self,mock_connectionaz):
+        create_repo()
+        connection_az=ConnectionAz(None,None)
+        connection_az.contenido={}
+        expected=json.loads('{"dir_md": "./prueba/documentacion/readme.html", "Área": " Soluciones de Clientes", "AnalistaÁgil": " Juan Guillermo Montoya", "Dominio": " Clientes", "Proyecto": " Móvil Éxito", "PalabrasClave": [" redención", " PCO", " acumulación"], "Infraestructuradedespliegue": [" AKS", "OKS", " GCP", " ODI", " OSB"], "SistemasOrigen": [" Clifre", " Teradata", " Sinco"], "SistemasDestino": [" Clifre", " Teradata", " Sinco", " Kafka"], "Tipodesarrollo": [" Api", " Worker", " Batch", " Modelo", " Portal Web", " Móvil ** main-pipeline.yml"], "VersiónLenguaje": [" NetCore", " Java", " Angular", " Python", " R"], "URLConsumoApi": "https://wolframio.grupo-exito.com/apiew/producto/v1/HLZKHMELSEVH/swagger/index.html"}')
+        result=connection_az.conditionDataJson("./repositorioPrueba/prueba/prueba")
+        self.assertAlmostEqual(result,expected)
+        delete_repo()
+    
+    #test conditionData
     @mock.patch.object(ConnectionAz,'__init__',return_value=None)
     @mock.patch('os.system',return_value=None)
+    #@mock.patch('requests.get',return_value=Mock_request_condition)
     def test_condition_data(self,mock_conectionaz,mock_system1):
         create_repo()
         data=json.loads('{"value": [{"author": {"date": "2021-11-09T21:41:52Z"}}]}')
         target_dir='./repositorioPrueba/prueba/prueba'
+        url="https://dev.azure.com/grupo-exito/GCIT-Agile/_apis/git/repositories/mis-premios-cloud-function/items?path=/documentacion/&$format=zip&download=true"
+        headers=json.loads('{"Accept": "application/json", "Authorization": "Basic Omc1dHE3eTRoZGI0bmM2NWFzZ2t2enF6Z3B5YzdveHB1czd3cTRtNWVrNGIycHJ0dXZ3YXE="}')
+        name_project="GCIT-Agile"
+        name_repo="mis-premios-cloud-function"
         connection_az=ConnectionAz(None,None)
         connection_az.first=True
         connection_az.personal_access_token="test"
-        result=connection_az.conditionData(data,target_dir,None,None,None)
-        expected=json.loads('{"dir_md": "./repositorioPrueba/prueba/prueba/readme.html", "Área": " Soluciones de Clientes", "AnalistaÁgil": " Juan Guillermo Montoya", "Dominio": " Clientes", "Proyecto": " Móvil Éxito", "PalabrasClave": [" redención", " PCO", " acumulación"], "Infraestructuradedespliegue": [" AKS", "OKS", " GCP", " ODI", " OSB"], "SistemasOrigen": [" Clifre", " Teradata", " Sinco"], "SistemasDestino": [" Clifre", " Teradata", " Sinco", " Kafka"], "Tipodesarrollo": [" Api", " Worker", " Batch", " Modelo", " Portal Web", " Móvil"], "VersiónLenguaje": [" NetCore", " Java", " Angular", " Python", " R"], "URLConsumoApi": "**https**https//wolframio.grupo-exito.com/apiew/producto/v1/HLZKHMELSEVH/swagger/index.html"}')
+        result=connection_az.conditionData(data,target_dir, url, headers, name_project, name_repo)
+        expected=json.loads('{"dir_md": "./prueba/documentacion/readme.html", "Dominio": "Default", "Proyecto": "Default", "Área": "Default", "AnalistaÁgil": "Default", "PalabrasClave": "Default", "Infraestructuradedespliegue": "Default", "SistemasOrigen": "Default", "SistemasDestino": "Default", "Tipodesarrollo": "Default", "VersiónLenguaje": "Default", "URLConsumoApi": "Default"}')
         self.assertAlmostEqual(result,expected)
-        self.assertTrue(os.path.exists('./repositorioPrueba/prueba/prueba/readme.html'))
+        self.assertTrue(os.path.exists('./repositorioPrueba/prueba/prueba/documentacion/readme.html'))
         delete_repo()
