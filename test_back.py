@@ -2,7 +2,6 @@ from typing import ValuesView
 import unittest
 import json
 from unittest import mock
-from defer import return_value
 from msrest.authentication import BasicAuthentication
 from azure.devops.connection import Connection
 import tempfile
